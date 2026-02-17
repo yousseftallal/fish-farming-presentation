@@ -1,4 +1,4 @@
-// PowerPoint-Style Navigation (Step-by-Step Reveal)
+// Mixed Navigation: Normal Scroll + Arrow Key Reveal
 document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
     initPresentation();
@@ -9,111 +9,87 @@ const initPresentation = () => {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
 
-    let currentSlideIndex = 0;
-
-    // Map to store current step index for each slide
-    // Key: Slide Index, Value: Current Step Index (-1 means no steps revealed yet)
+    // Track revealed steps per slide
     let slideSteps = new Array(slides.length).fill(-1);
 
     // Initial Setup
     const setupSlides = () => {
-        slides.forEach((slide, index) => {
+        slides.forEach((slide) => {
             const steps = slide.querySelectorAll('.steppable');
-            // Hide all steps initially via JS to ensure logic matches visual state
             steps.forEach(step => {
                 step.classList.remove('visible');
-                gsap.set(step, { opacity: 0, y: 20 });
+                gsap.set(step, { opacity: 0, y: 30 });
             });
         });
-        updateUI(0);
+
+        // Setup Scroll Spy to update active Dot and trigger Slide Entrance animations
+        slides.forEach((slide, index) => {
+            ScrollTrigger.create({
+                trigger: slide,
+                scroller: '.presentation-container',
+                start: "top center",
+                end: "bottom center",
+                onEnter: () => updateActiveSlide(index),
+                onEnterBack: () => updateActiveSlide(index)
+            });
+        });
     };
 
-    const updateUI = (index) => {
-        if (!dots[index]) return;
-
+    const updateActiveSlide = (index) => {
         // Update Dots
         dots.forEach(d => d.classList.remove('active'));
-        dots[index].classList.add('active');
+        if (dots[index]) dots[index].classList.add('active');
 
-        // Scroll to Slide
-        slides[index].scrollIntoView({ behavior: 'smooth' });
+        // Animate Entry Content (Titles, etc.) that are NOT steppable
+        const slide = slides[index];
+        const title = slide.querySelector('h1, h2');
+        const subtitle = slide.querySelector('.subtitle');
+        const staticContent = slide.querySelectorAll('p:not(.steppable, .hidden-details p)');
 
-        // Animate Title & Static Content (Non-steppable stuff)
-        const title = slides[index].querySelector('h1, h2');
-        const subtitle = slides[index].querySelector('.subtitle');
-        const staticContent = slides[index].querySelectorAll('p:not(.steppable, .hidden-details p)');
-
-        gsap.fromTo(title, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
-        if (subtitle) gsap.fromTo(subtitle, { opacity: 0 }, { opacity: 1, duration: 1, delay: 0.3 });
-        if (staticContent.length) gsap.fromTo(staticContent, { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 0.5 });
+        gsap.to([title, subtitle, staticContent], { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 });
     };
 
-    // --- NAVIGATION LOGIC ---
-    const nextStep = () => {
-        const currentSlide = slides[currentSlideIndex];
-        const steps = currentSlide.querySelectorAll('.steppable');
-        const currentStepIndex = slideSteps[currentSlideIndex];
+    // --- KEYBOARD REVEAL LOGIC ONLY ---
+    // Does NOT control scroll. User scrolls normally.
+    // Arrow Right: Reveal next item in CURRENTLY VISIBLE slide.
 
-        // If there are hidden steps in the current slide, reveal the next one
-        if (currentStepIndex < steps.length - 1) {
-            const nextStepIndex = currentStepIndex + 1;
-            const stepToReveal = steps[nextStepIndex];
-
-            // Reveal Logic
-            stepToReveal.classList.add('visible');
-            gsap.to(stepToReveal, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
-
-            slideSteps[currentSlideIndex] = nextStepIndex;
-        }
-        // If all steps revealed (or no steps), go to NEXT SLIDE
-        else if (currentSlideIndex < slides.length - 1) {
-            currentSlideIndex++;
-            updateUI(currentSlideIndex);
-        }
-    };
-
-    const prevStep = () => {
-        const currentSlide = slides[currentSlideIndex];
-        const steps = currentSlide.querySelectorAll('.steppable');
-        const currentStepIndex = slideSteps[currentSlideIndex];
-
-        // If we are deep into steps, hide the last revealed one
-        if (currentStepIndex >= 0) {
-            const stepToHide = steps[currentStepIndex];
-
-            // Hide Logic
-            stepToHide.classList.remove('visible');
-            gsap.to(stepToHide, { opacity: 0, y: 20, duration: 0.3 });
-
-            slideSteps[currentSlideIndex] = currentStepIndex - 1;
-        }
-        // If no steps revealed, go to PREV SLIDE
-        else if (currentSlideIndex > 0) {
-            currentSlideIndex--;
-            updateUI(currentSlideIndex);
-        }
-    };
-
-    // Keyboard Listeners
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
-            e.preventDefault();
-            nextStep();
-        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-            e.preventDefault();
-            prevStep();
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+            // Find currently visible slide based on scroll position
+            const slideHeight = window.innerHeight;
+            const currentScroll = container.scrollTop;
+            const currentSlideIndex = Math.round(currentScroll / slideHeight);
+
+            if (currentSlideIndex >= 0 && currentSlideIndex < slides.length) {
+                const currentSlide = slides[currentSlideIndex];
+                const steps = currentSlide.querySelectorAll('.steppable');
+                const currentStepIndex = slideSteps[currentSlideIndex];
+
+                if (currentStepIndex < steps.length - 1) {
+                    // We have more steps to reveal in this slide
+                    e.preventDefault(); // Stop page from scrolling down/right
+
+                    const nextStepIndex = currentStepIndex + 1;
+                    const stepToReveal = steps[nextStepIndex];
+
+                    stepToReveal.classList.add('visible');
+                    gsap.to(stepToReveal, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.2)' });
+
+                    slideSteps[currentSlideIndex] = nextStepIndex;
+                }
+                // If all steps revealed, do nothing. Let user scroll normally.
+            }
         }
     });
 
-    // Dot Nav (Reserts steps for simplicity when jumping)
+    // Dot Nav (Scrolls to slide)
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
-            currentSlideIndex = index;
-            updateUI(currentSlideIndex);
+            slides[index].scrollIntoView({ behavior: 'smooth' });
         });
     });
 
-    // Click to Reveal Details Logic (Preserved)
+    // Expandable Details Logic
     document.querySelectorAll('.expandable').forEach(item => {
         item.addEventListener('click', function (e) {
             e.stopPropagation();
@@ -127,7 +103,7 @@ const initPresentation = () => {
                     });
                 } else {
                     details.style.display = 'block';
-                    const fullHeight = details.scrollHeight + "px"; // Better calc
+                    const fullHeight = details.scrollHeight;
                     gsap.fromTo(details, { height: 0, opacity: 0 }, { height: fullHeight, opacity: 1, duration: 0.5 });
                     this.classList.add('expanded');
                 }
@@ -135,6 +111,5 @@ const initPresentation = () => {
         });
     });
 
-    // Initialize
     setupSlides();
 };
