@@ -14,26 +14,45 @@ const initPresentation = () => {
         // We select generic classes we added or existing structure
         const elementsToAnimate = slide.querySelectorAll('.animate-item, h1, h2, .subtitle, p:not(.hidden-details p), .team-member, .toc-list li, .image-frame, .video-wrapper, .m-card, .b-item, .ai-point, .yolo-showcase, .feature-list li');
 
-        // Initial state for all animate-able elements in this slide
-        gsap.set(elementsToAnimate, { autoAlpha: 0, y: 50 });
+        // Initial state determination based on class
+        elementsToAnimate.forEach(el => {
+            // Reset transforms first
+            gsap.set(el, { clearProps: "all" });
+
+            if (el.classList.contains('anim-left')) {
+                gsap.set(el, { x: -100, autoAlpha: 0 });
+            } else if (el.classList.contains('anim-right')) {
+                gsap.set(el, { x: 100, autoAlpha: 0 });
+            } else if (el.classList.contains('anim-zoom')) {
+                gsap.set(el, { scale: 0.5, autoAlpha: 0 });
+            } else if (el.classList.contains('anim-blur')) {
+                gsap.set(el, { filter: 'blur(10px)', autoAlpha: 0 });
+            } else {
+                // Default Fade Up
+                gsap.set(el, { y: 50, autoAlpha: 0 });
+            }
+        });
 
         ScrollTrigger.create({
             trigger: slide,
             scroller: '.presentation-container',
-            start: "top 60%", // Start animating when top of slide is 60% down viewport
+            start: "top 60%",
             end: "bottom center",
             onEnter: () => {
                 // Activate Dot
                 dots.forEach(d => d.classList.remove('active'));
                 if (dots[index]) dots[index].classList.add('active');
 
-                // Animate elements with specific Stagger
+                // Animate elements to neutral state
                 gsap.to(elementsToAnimate, {
                     autoAlpha: 1,
+                    x: 0,
                     y: 0,
-                    duration: 0.8,
+                    scale: 1,
+                    filter: 'blur(0px)',
+                    duration: 1,
                     ease: "power3.out",
-                    stagger: 0.2, // The requested "time between components"
+                    stagger: 0.15,
                     overwrite: 'auto'
                 });
             },
