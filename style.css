@@ -3,6 +3,8 @@
     --secondary-color: #0077ff;
     --accent-color: #ffd700;
     --success-color: #00ff88;
+    --danger-color: #ff4444;
+    /* New for Losses */
     --bg-dark: #001f3f;
     --glass-bg: rgba(0, 30, 60, 0.85);
     --glass-border: rgba(0, 242, 255, 0.2);
@@ -47,7 +49,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(0, 20, 40, 0.4) 0%, rgba(2, 10, 28, 0.95) 100%);
+    /* Lightened the overlay opacity from 0.95 to 0.85 for more visibility */
+    background: radial-gradient(circle at center, rgba(0, 20, 60, 0.3) 0%, rgba(2, 10, 30, 0.85) 100%);
     z-index: 1;
 }
 
@@ -72,13 +75,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 8%;
+    padding: 0 5%;
+    /* Reduced padding slightly for more space */
     position: relative;
     overflow: hidden;
 }
 
 /* --- TITLE SECTION (SLIDE 1) --- */
-/* Improved spacing and organization */
 .title-group {
     margin-bottom: 3rem;
     position: relative;
@@ -128,13 +131,13 @@ p {
     margin-bottom: 0.8rem;
 }
 
-/* Animation Targets (GSAP handles visibility) */
+/* Animation Targets */
 .animate-item {
     opacity: 0;
     transform: translateY(30px);
 }
 
-/* --- SUPERVISORS --- */
+/* --- SUPERVISORS & TEAM --- */
 .supervisors-container {
     display: flex;
     gap: 3rem;
@@ -160,7 +163,6 @@ p {
     color: var(--accent-color);
 }
 
-/* --- TEAM ROWS --- */
 .team-rows {
     display: flex;
     flex-direction: column;
@@ -177,11 +179,9 @@ p {
     max-width: 1300px;
 }
 
-/* Base Team Member Card */
 .team-member {
     flex: 1;
     min-width: 160px;
-    /* Ensure they don't get too squished */
     padding: 1.2rem;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -204,7 +204,6 @@ p {
     box-shadow: 0 10px 30px rgba(0, 242, 255, 0.15);
 }
 
-/* Accordion Expansion */
 .team-member.expanded-card {
     flex: 2;
     background: rgba(0, 30, 60, 0.95);
@@ -262,8 +261,189 @@ p {
     transition: all 0.4s ease 0.2s;
 }
 
+/* --- BUSINESS COMPARISON (NEW) --- */
+.comparison-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 2rem;
+}
 
-/* Generic Components */
+.comp-card {
+    flex: 1;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.comp-card.manual {
+    background: rgba(40, 0, 0, 0.6);
+    border-color: rgba(255, 68, 68, 0.3);
+}
+
+.comp-card.smart {
+    background: rgba(0, 40, 20, 0.6);
+    border-color: rgba(0, 255, 136, 0.3);
+}
+
+.comp-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comp-card.manual .comp-title {
+    color: var(--danger-color);
+}
+
+.comp-card.smart .comp-title {
+    color: var(--success-color);
+}
+
+.stat-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.stat-item i {
+    margin-top: 4px;
+}
+
+.comp-card.manual i {
+    color: var(--danger-color);
+}
+
+.comp-card.smart i {
+    color: var(--success-color);
+}
+
+.source-cite {
+    margin-top: auto;
+    font-size: 0.75rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+}
+
+/* --- DEVICE TRIO (NEW UI SLIDE) --- */
+.device-showcase {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+    perspective: 1000px;
+}
+
+/* Laptop */
+.device.laptop {
+    width: 400px;
+    aspect-ratio: 16/10;
+    position: relative;
+    background: #111;
+    border-radius: 12px 12px 0 0;
+    border: 2px solid #333;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.device.laptop::after {
+    /* Keyboard base */
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: -10%;
+    width: 120%;
+    height: 12px;
+    background: #222;
+    border-radius: 0 0 10px 10px;
+    transform: perspective(500px) rotateX(10deg);
+}
+
+/* Tablet */
+.device.tablet {
+    width: 140px;
+    aspect-ratio: 3/4;
+    position: relative;
+    background: #111;
+    border-radius: 10px;
+    border: 2px solid #333;
+    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    transform: translateX(-20px);
+}
+
+/* Phone */
+.device.phone {
+    width: 80px;
+    aspect-ratio: 9/19;
+    position: relative;
+    background: #111;
+    border-radius: 12px;
+    border: 2px solid #333;
+    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.4);
+    z-index: 3;
+    transform: translateX(-40px);
+}
+
+.screen-content {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+    border-radius: inherit;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.ui-header {
+    width: 100%;
+    height: 10%;
+    background: rgba(0, 242, 255, 0.1);
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.ui-body {
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.ui-widget {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.ui-graph {
+    grid-column: span 2;
+    background: rgba(0, 255, 136, 0.05);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+/* --- GENERIC --- */
 .content-wrapper {
     width: 100%;
     max-width: 1200px;
@@ -484,28 +664,6 @@ p {
     line-height: 1;
 }
 
-.business-grid {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    margin-top: 2rem;
-}
-
-.b-item {
-    width: 250px;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
-    text-align: center;
-}
-
-.b-icon {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
 .toc-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -623,5 +781,13 @@ p {
     .team-member.expanded-card {
         flex: 1 1 100%;
         max-width: 100%;
+    }
+
+    .comparison-container {
+        flex-direction: column;
+    }
+
+    .device-showcase {
+        transform: scale(0.8);
     }
 }

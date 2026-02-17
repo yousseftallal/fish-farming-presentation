@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <!-- Team Grid (Split into rows for clean folding) -->
+                <!-- Team Grid -->
                 <div class="team-rows">
                     <!-- Row 1: 4 Members -->
                     <div class="team-row animate-item">
@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <!-- Row 2: 3 Members (Centered) -->
+                    <!-- Row 2: 3 Members -->
                     <div class="team-row animate-item">
                         <div class="team-member">
                             <div class="avatar"><i class="fa-solid fa-microchip"></i></div>
@@ -148,12 +148,12 @@
                     <ul class="toc-list">
                         <li class="animate-item"><span>01</span> Introduction</li>
                         <li class="animate-item"><span>02</span> Motivation</li>
-                        <li class="animate-item"><span>03</span> Business Capabilities</li>
+                        <li class="animate-item"><span>03</span> Business Analysis</li>
                         <li class="animate-item"><span>04</span> System Analysis</li>
                         <li class="animate-item"><span>05</span> Technical Architecture</li>
                         <li class="animate-item"><span>06</span> AI Model Results</li>
                         <li class="animate-item"><span>07</span> Hardware Demo</li>
-                        <li class="animate-item"><span>08</span> User Interface</li>
+                        <li class="animate-item"><span>08</span> Cross-Platform UI</li>
                     </ul>
                 </div>
             </div>
@@ -231,31 +231,39 @@
             </div>
         </section>
 
-        <!-- Slide 5: Business Capabilities -->
+        <!-- Slide 5: Business Capabilities (UPDATED) -->
         <section class="slide" id="slide-5">
             <div class="content-wrapper center">
-                <h2>Business Potential</h2>
-                <div class="business-grid">
-                    <div class="b-item expandable animate-item">
-                        <div class="b-icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <h3>Efficiency <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
-                        <div class="hidden-details">
-                            <p>Automated systems reduce manual labor by 40% and prevent human error.</p>
-                        </div>
+                <h2>Business Impact & Analysis</h2>
+                <div class="comparison-container animate-item">
+                    <!-- Manual / Loss Side -->
+                    <div class="comp-card manual">
+                        <div class="comp-title"><i class="fa-solid fa-triangle-exclamation"></i> Traditional Farming
+                            Losses</div>
+                        <ul class="stat-list">
+                            <li class="stat-item"><i class="fa-solid fa-xmark"></i> <span><strong>30% Mortality
+                                        Rate</strong> due to undetected diseases and poor water quality.</span></li>
+                            <li class="stat-item"><i class="fa-solid fa-xmark"></i> <span><strong>20% Feed
+                                        Waste</strong> from manual overfeeding, increasing costs and pollution.</span>
+                            </li>
+                            <li class="stat-item"><i class="fa-solid fa-xmark"></i> <span><strong>High Labor
+                                        Cost</strong> requiring 24/7 manual monitoring.</span></li>
+                        </ul>
+                        <div class="source-cite">Source: FAO State of World Fisheries 2022</div>
                     </div>
-                    <div class="b-item expandable animate-item">
-                        <div class="b-icon"><i class="fa-solid fa-robot"></i></div>
-                        <h3>Automation <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
-                        <div class="hidden-details">
-                            <p>24/7 monitoring and auto-correction of pH and Oxygen levels.</p>
-                        </div>
-                    </div>
-                    <div class="b-item expandable animate-item">
-                        <div class="b-icon"><i class="fa-solid fa-layer-group"></i></div>
-                        <h3>Scalable <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
-                        <div class="hidden-details">
-                            <p>Modular design allows the system to grow from a single pond to mega-farms.</p>
-                        </div>
+
+                    <!-- Smart / Gain Side -->
+                    <div class="comp-card smart">
+                        <div class="comp-title"><i class="fa-solid fa-check-circle"></i> Smart System Gains</div>
+                        <ul class="stat-list">
+                            <li class="stat-item"><i class="fa-solid fa-arrow-trend-up"></i> <span><strong>Detect 95% of
+                                        Infections</strong> early using YOLOv8, reducing spread.</span></li>
+                            <li class="stat-item"><i class="fa-solid fa-leaf"></i> <span><strong>Optimize Feed by
+                                        15%</strong> via automated quality-based dispensing.</span></li>
+                            <li class="stat-item"><i class="fa-solid fa-robot"></i> <span><strong>Remote
+                                        Management</strong> reduces labor needs and enables scaling.</span></li>
+                        </ul>
+                        <div class="source-cite">Based on Project Pilot Data & Market Research</div>
                     </div>
                 </div>
             </div>
@@ -318,10 +326,10 @@
 
                 <div class="visual-content animate-item">
                     <div class="yolo-showcase">
+                        <!-- AI Image Source -->
                         <div class="scan-frame">
-                            <!-- New Image Source (Technology / Analysis) that is reliable -->
                             <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop"
-                                alt="AI Analysis" style="object-position: center;">
+                                alt="AI Analysis">
                             <div class="scan-line"></div>
                             <div class="detection-box" style="top: 40%; left: 30%;">
                                 <span><i class="fa-solid fa-triangle-exclamation"></i> Virus: 95%</span>
@@ -355,30 +363,61 @@
             </div>
         </section>
 
-        <!-- Slide 9: UI Design -->
+        <!-- Slide 9: UI Design (UPDATED) -->
         <section class="slide" id="slide-9">
             <div class="content-split reverse">
                 <div class="text-content">
-                    <h2>User Interface</h2>
-                    <p>Designed for farmers, engineers, and farm owners.</p>
+                    <h2>Cross-Platform Interface</h2>
+                    <p class="animate-item">One codebase, running everywhere. Our system adapts to the farmer's needs.
+                    </p>
+
                     <ul class="feature-list">
-                        <li class="animate-item"><i class="fa-solid fa-moon"></i> High Contrast Dark Mode</li>
-                        <li class="animate-item"><i class="fa-solid fa-chart-pie"></i> Visual Data Analytics</li>
-                        <li class="animate-item"><i class="fa-solid fa-bell"></i> Instant Notifications</li>
+                        <li class="animate-item">
+                            <i class="fa-solid fa-laptop"></i> <strong>Web Dashboard:</strong>
+                            <span style="display:block; font-size: 0.9rem; color: #aaa; margin-top:5px;">For managers to
+                                analyze long-term trends and export reports on large screens.</span>
+                        </li>
+                        <li class="animate-item">
+                            <i class="fa-solid fa-tablet-screen-button"></i> <strong>Tablet Mode:</strong>
+                            <span style="display:block; font-size: 0.9rem; color: #aaa; margin-top:5px;">Optimize for
+                                on-site monitoring with touch-friendly controls.</span>
+                        </li>
+                        <li class="animate-item">
+                            <i class="fa-solid fa-mobile-screen"></i> <strong>Mobile App:</strong>
+                            <span style="display:block; font-size: 0.9rem; color: #aaa; margin-top:5px;">Instant alerts
+                                and quick status checks for farmers on the go.</span>
+                        </li>
                     </ul>
                 </div>
-                <div class="visual-content animate-item">
-                    <div class="mobile-mockup-group">
-                        <div class="mobile-mockup">
-                            <div class="screen">
-                                <i class="fa-solid fa-water app-icon"></i>
-                                <div class="app-line"></div>
-                                <div class="app-chart"></div>
+
+                <div class="visual-content animate-item" style="overflow: visible;">
+                    <div class="device-showcase">
+                        <!-- Laptop -->
+                        <div class="device laptop">
+                            <div class="screen-content">
+                                <div class="ui-header"></div>
+                                <div class="ui-body">
+                                    <div class="ui-graph"></div>
+                                    <div class="ui-widget"></div>
+                                    <div class="ui-widget"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="mobile-mockup small">
-                            <div class="screen">
-                                <div class="app-chart" style="border-color: #00ff88;"></div>
+                        <!-- Tablet -->
+                        <div class="device tablet">
+                            <div class="screen-content">
+                                <div class="ui-header"></div>
+                                <div class="ui-body" style="grid-template-columns: 1fr;">
+                                    <div class="ui-graph" style="height: 50%;"></div>
+                                    <div class="ui-widget" style="height: 40%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Phone -->
+                        <div class="device phone">
+                            <div class="screen-content">
+                                <i class="fa-solid fa-water app-icon" style="font-size: 1rem; margin-top: 5px;"></i>
+                                <div class="app-line"></div>
                             </div>
                         </div>
                     </div>
