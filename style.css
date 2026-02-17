@@ -77,12 +77,21 @@ body {
     overflow: hidden;
 }
 
+/* --- TITLE SECTION (SLIDE 1) --- */
+/* Improved spacing and organization */
+.title-group {
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
 h1.main-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-family: 'Orbitron';
     margin-bottom: 0.5rem;
     color: #fff;
-    text-shadow: 0 0 20px var(--primary-color);
+    text-shadow: 0 0 25px var(--primary-color);
+    letter-spacing: 2px;
 }
 
 h2 {
@@ -93,10 +102,23 @@ h2 {
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: var(--text-muted);
     font-weight: 300;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+}
+
+.subtitle::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 p {
@@ -106,40 +128,39 @@ p {
     margin-bottom: 0.8rem;
 }
 
-/* Steppable Elements */
-.steppable {
+/* Animation Targets (GSAP handles visibility) */
+.animate-item {
     opacity: 0;
-    visibility: hidden;
     transform: translateY(30px);
-}
-
-.steppable.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
 }
 
 /* --- SUPERVISORS --- */
 .supervisors-container {
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
     justify-content: center;
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .team-member.supervisor {
     border-color: var(--accent-color);
-    background: rgba(255, 215, 0, 0.1);
-    max-width: 300px;
-    height: auto;
+    background: rgba(255, 215, 0, 0.08);
+    max-width: 280px;
+    padding: 1.2rem;
 }
 
 .team-member.supervisor h3 {
     color: var(--accent-color);
+    font-size: 1.1rem;
 }
 
-/* --- TEAM ROWS (New Layout) --- */
+.team-member.supervisor .avatar {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+}
+
+/* --- TEAM ROWS --- */
 .team-rows {
     display: flex;
     flex-direction: column;
@@ -150,103 +171,95 @@ p {
 
 .team-row {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
     width: 100%;
-    height: 250px;
-    /* Shorter for compact look */
-    max-width: 1200px;
+    max-width: 1300px;
 }
 
 /* Base Team Member Card */
 .team-member {
     flex: 1;
-    /* Equal width initially */
-    padding: 1rem;
+    min-width: 160px;
+    /* Ensure they don't get too squished */
+    padding: 1.2rem;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     text-align: center;
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
-    overflow: hidden;
     position: relative;
-
-    /* Small/Compact Initial State */
-    opacity: 0.85;
-    transform: scale(0.98);
+    overflow: hidden;
 }
 
 .team-member:hover {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Active Expanded State */
-.team-member.expanded-card {
-    flex: 2.5;
-    /* Grow */
-    opacity: 1;
-    transform: scale(1.02);
-    background: rgba(0, 40, 80, 0.95);
+    background: rgba(0, 40, 80, 0.8);
+    transform: translateY(-5px);
     border-color: var(--primary-color);
-    box-shadow: 0 0 25px rgba(0, 242, 255, 0.3);
-    z-index: 5;
+    box-shadow: 0 10px 30px rgba(0, 242, 255, 0.15);
 }
 
-/* Sibling Shrinking behavior limited to the SAME ROW */
+/* Accordion Expansion */
+.team-member.expanded-card {
+    flex: 2;
+    background: rgba(0, 30, 60, 0.95);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+    z-index: 10;
+}
+
 .team-row:has(.expanded-card) .team-member:not(.expanded-card) {
-    flex: 0.6;
-    /* Shrink siblings */
-    opacity: 0.5;
+    opacity: 0.6;
     transform: scale(0.95);
 }
 
 .avatar {
     font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     transition: transform 0.3s;
 }
 
 .team-member.expanded-card .avatar {
     transform: scale(1.1);
+    color: #fff;
 }
 
 .team-member h3 {
     font-size: 1rem;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.3rem;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+    font-weight: 600;
 }
 
 .team-member span {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
-    transition: opacity 0.3s;
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
 .hidden-details {
     display: none;
-    margin-top: 1rem;
     text-align: left;
     width: 100%;
     opacity: 0;
     transform: translateY(10px);
-    transition: all 0.5s ease 0.2s;
     font-size: 0.9rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .team-member.expanded-card .hidden-details {
     display: block;
     opacity: 1;
     transform: translateY(0);
+    transition: all 0.4s ease 0.2s;
 }
 
 
@@ -335,6 +348,12 @@ p {
     border-radius: 10px;
     border: 1px solid var(--glass-border);
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.m-card:hover {
+    transform: translateX(10px);
+    border-color: var(--primary-color);
 }
 
 .m-card>div {

@@ -1,124 +1,78 @@
-// Strict PowerPoint-Style Navigation & Hybrid Scroll
+// GSAP ScrollTrigger Animation (Auto-Scroll with Stagger)
 document.addEventListener('DOMContentLoaded', () => {
-    // Ensure GSAP is loaded
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-        initPresentation();
-    } else {
-        console.error("GSAP or ScrollTrigger not loaded.");
-    }
+    gsap.registerPlugin(ScrollTrigger);
+    initPresentation();
 });
 
 const initPresentation = () => {
-    const container = document.querySelector('.presentation-container');
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
 
-    // Initial Setup
-    const setupSlides = () => {
-        slides.forEach((slide) => {
-            const steps = slide.querySelectorAll('.steppable');
-            steps.forEach(step => {
-                step.classList.remove('visible');
-                // Use autoAlpha for better performance (sets opacity + visibility)
-                gsap.set(step, { autoAlpha: 0, y: 30 });
-            });
-        });
+    // Animate each slide when it enters the viewport
+    slides.forEach((slide, index) => {
+        // Elements to animate: title group, supervisors, rows, other content
+        // We select generic classes we added or existing structure
+        const elementsToAnimate = slide.querySelectorAll('.animate-item, h1, h2, .subtitle, p:not(.hidden-details p), .team-member, .toc-list li, .image-frame, .video-wrapper, .m-card, .b-item, .ai-point, .yolo-showcase, .feature-list li');
 
-        // Scroll Spy
-        slides.forEach((slide, index) => {
-            ScrollTrigger.create({
-                trigger: slide,
-                scroller: '.presentation-container',
-                start: "top center",
-                end: "bottom center",
-                onEnter: () => activateSlide(index),
-                onEnterBack: () => activateSlide(index)
-            });
-        });
-    };
+        // Initial state for all animate-able elements in this slide
+        gsap.set(elementsToAnimate, { autoAlpha: 0, y: 50 });
 
-    const activateSlide = (index) => {
-        // Update Dots
-        dots.forEach(d => d.classList.remove('active'));
-        if (dots[index]) dots[index].classList.add('active');
+        ScrollTrigger.create({
+            trigger: slide,
+            scroller: '.presentation-container',
+            start: "top 60%", // Start animating when top of slide is 60% down viewport
+            end: "bottom center",
+            onEnter: () => {
+                // Activate Dot
+                dots.forEach(d => d.classList.remove('active'));
+                if (dots[index]) dots[index].classList.add('active');
 
-        // Animate Entry Content (Titles, etc.) that are NOT steppable
-        const slide = slides[index];
-        if (!slide) return;
+                // Animate elements with specific Stagger
+                gsap.to(elementsToAnimate, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power3.out",
+                    stagger: 0.2, // The requested "time between components"
+                    overwrite: 'auto'
+                });
+            },
+            onEnterBack: () => {
+                // Activate Dot (Reverse scroll)
+                dots.forEach(d => d.classList.remove('active'));
+                if (dots[index]) dots[index].classList.add('active');
 
-        const title = slide.querySelector('h1, h2');
-        const subtitle = slide.querySelector('.subtitle');
-        // Get static p tags that are NOT children of hidden details (prevents double selection)
-        const staticContent = slide.querySelectorAll('p:not(.steppable):not(.hidden-details p)');
-
-        // Safely collect animation targets that actually exist
-        const targetsToAnimate = [];
-        if (title) targetsToAnimate.push(title);
-        if (subtitle) targetsToAnimate.push(subtitle);
-        if (staticContent.length > 0) targetsToAnimate.push(...staticContent);
-
-        if (targetsToAnimate.length > 0) {
-            gsap.to(targetsToAnimate, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.1, overwrite: 'auto' });
-        }
-    };
-
-    // --- HYBRID NAVIGATION LOGIC ---
-    // Right Arrow: Reveal Next Item -> IF ALL REVEALED -> Scroll to Next Slide
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
-
-            // Find currently visible slide
-            const slideHeight = window.innerHeight;
-            // Use 10px buffer
-            const currentScroll = container.scrollTop;
-            const currentSlideIndex = Math.round(currentScroll / slideHeight);
-
-            if (currentSlideIndex >= 0 && currentSlideIndex < slides.length) {
-                const currentSlide = slides[currentSlideIndex];
-                const steps = currentSlide.querySelectorAll('.steppable');
-
-                // Find first non-visible step
-                let nextStepToReveal = null;
-                for (let i = 0; i < steps.length; i++) {
-                    // Check specific visibility class or style
-                    if (!steps[i].classList.contains('visible') || getComputedStyle(steps[i]).visibility === 'hidden') {
-                        nextStepToReveal = steps[i];
-                        break;
-                    }
-                }
-
-                if (nextStepToReveal) {
-                    e.preventDefault(); // Stop scrolling
-                    // Reveal it!
-                    nextStepToReveal.classList.add('visible');
-                    gsap.to(nextStepToReveal, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'back.out(1.2)' });
-
-                    // Small auto-scroll only if element is off-screen
-                    const rect = nextStepToReveal.getBoundingClientRect();
-                    if (rect.bottom > window.innerHeight) {
-                        nextStepToReveal.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                    }
-                } else {
-                    // All revealed? Go to NEXT SLIDE
-                    if (currentSlideIndex < slides.length - 1) {
-                        e.preventDefault();
-                        slides[currentSlideIndex + 1].scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
+                // Re-play animation? Or just ensure visible?
+                // User asked for "hiding and reappearing" behavior essentially by asking for "like before"
+                // So we re-trigger the staggering entry
+                gsap.to(elementsToAnimate, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power3.out",
+                    stagger: 0.1,
+                    overwrite: 'auto'
+                });
+            },
+            onLeave: () => {
+                // Optional: Fade out when leaving to reset? 
+                // "Reset like before" implies they animate IN again next time.
+                gsap.to(elementsToAnimate, {
+                    autoAlpha: 0,
+                    y: -30,
+                    duration: 0.5,
+                    overwrite: 'auto'
+                });
+            },
+            onLeaveBack: () => {
+                gsap.to(elementsToAnimate, {
+                    autoAlpha: 0,
+                    y: 30,
+                    duration: 0.5,
+                    overwrite: 'auto'
+                });
             }
-        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-            // Optional: Go back to previous slide if desired
-            // Not implementing "Un-reveal" for simplicity, just slide navigation
-            const slideHeight = window.innerHeight;
-            const currentScroll = container.scrollTop;
-            const currentSlideIndex = Math.round(currentScroll / slideHeight);
-            if (currentSlideIndex > 0) {
-                e.preventDefault();
-                slides[currentSlideIndex - 1].scrollIntoView({ behavior: 'smooth' });
-            }
-        }
+        });
     });
 
     // --- TEAM ACCORDION INTERACTION ---
@@ -126,8 +80,6 @@ const initPresentation = () => {
     teamMembers.forEach(member => {
         member.addEventListener('click', (e) => {
             e.stopPropagation();
-
-            // Toggle
             const isActive = member.classList.contains('expanded-card');
 
             // Collapse all
@@ -168,6 +120,4 @@ const initPresentation = () => {
             slides[index].scrollIntoView({ behavior: 'smooth' });
         });
     });
-
-    setupSlides();
 };
