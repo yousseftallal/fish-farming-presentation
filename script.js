@@ -1,4 +1,4 @@
-// Mixed Navigation: Normal Scroll + Arrow Key Reveal
+// Hybrid Navigation & Team Interaction
 document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
     initPresentation();
@@ -9,11 +9,9 @@ const initPresentation = () => {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
 
-    // Track revealed steps per slide
-    let slideSteps = new Array(slides.length).fill(-1);
-
     // Initial Setup
     const setupSlides = () => {
+        // Reset steppables
         slides.forEach((slide) => {
             const steps = slide.querySelectorAll('.steppable');
             steps.forEach(step => {
@@ -22,20 +20,20 @@ const initPresentation = () => {
             });
         });
 
-        // Setup Scroll Spy to update active Dot and trigger Slide Entrance animations
+        // Scroll Spy
         slides.forEach((slide, index) => {
             ScrollTrigger.create({
                 trigger: slide,
                 scroller: '.presentation-container',
                 start: "top center",
                 end: "bottom center",
-                onEnter: () => updateActiveSlide(index),
-                onEnterBack: () => updateActiveSlide(index)
+                onEnter: () => activateSlide(index),
+                onEnterBack: () => activateSlide(index)
             });
         });
     };
 
-    const updateActiveSlide = (index) => {
+    const activateSlide = (index) => {
         // Update Dots
         dots.forEach(d => d.classList.remove('active'));
         if (dots[index]) dots[index].classList.add('active');
@@ -49,13 +47,14 @@ const initPresentation = () => {
         gsap.to([title, subtitle, staticContent], { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 });
     };
 
-    // --- KEYBOARD REVEAL LOGIC ONLY ---
-    // Does NOT control scroll. User scrolls normally.
-    // Arrow Right: Reveal next item in CURRENTLY VISIBLE slide.
+    // --- HYBRID NAVIGATION LOGIC ---
+    // Right Arrow: Reveal Next Item -> IF ALL REVEALED -> Scroll to Next Slide
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ') {
-            // Find currently visible slide based on scroll position
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+            e.preventDefault();
+
+            // Find currently visible slide
             const slideHeight = window.innerHeight;
             const currentScroll = container.scrollTop;
             const currentSlideIndex = Math.round(currentScroll / slideHeight);
@@ -63,34 +62,51 @@ const initPresentation = () => {
             if (currentSlideIndex >= 0 && currentSlideIndex < slides.length) {
                 const currentSlide = slides[currentSlideIndex];
                 const steps = currentSlide.querySelectorAll('.steppable');
-                const currentStepIndex = slideSteps[currentSlideIndex];
-
-                if (currentStepIndex < steps.length - 1) {
-                    // We have more steps to reveal in this slide
-                    e.preventDefault(); // Stop page from scrolling down/right
-
-                    const nextStepIndex = currentStepIndex + 1;
-                    const stepToReveal = steps[nextStepIndex];
-
-                    stepToReveal.classList.add('visible');
-                    gsap.to(stepToReveal, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.2)' });
-
-                    slideSteps[currentSlideIndex] = nextStepIndex;
+                // Find first non-visible step
+                let nextStepToReveal = null;
+                for (let step of steps) {
+                    if (!step.classList.contains('visible')) {
+                        nextStepToReveal = step;
+                        break;
+                    }
                 }
-                // If all steps revealed, do nothing. Let user scroll normally.
+
+                if (nextStepToReveal) {
+                    // Reveal it!
+                    nextStepToReveal.classList.add('visible');
+                    gsap.to(nextStepToReveal, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.2)' });
+                    // Scroll to ensure it's in view if needed
+                    nextStepToReveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    // All revealed? Go to NEXT SLIDE
+                    if (currentSlideIndex < slides.length - 1) {
+                        slides[currentSlideIndex + 1].scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
             }
         }
     });
 
-    // Dot Nav (Scrolls to slide)
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            slides[index].scrollIntoView({ behavior: 'smooth' });
+    // --- TEAM ACCORDION INTERACTION ---
+    const teamMembers = document.querySelectorAll('.team-member');
+    teamMembers.forEach(member => {
+        member.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent bubbling issues
+
+            // Check if already active
+            const isActive = member.classList.contains('expanded-card');
+
+            // Reset all
+            teamMembers.forEach(m => m.classList.remove('expanded-card'));
+
+            if (!isActive) {
+                member.classList.add('expanded-card');
+            }
         });
     });
 
-    // Expandable Details Logic
-    document.querySelectorAll('.expandable').forEach(item => {
+    // --- GENERIC CLICK TO REVEAL (Motivation, etc.) ---
+    document.querySelectorAll('.expandable:not(.team-member)').forEach(item => {
         item.addEventListener('click', function (e) {
             e.stopPropagation();
             const details = this.querySelector('.hidden-details');
@@ -108,6 +124,13 @@ const initPresentation = () => {
                     this.classList.add('expanded');
                 }
             }
+        });
+    });
+
+    // Dot Nav
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            slides[index].scrollIntoView({ behavior: 'smooth' });
         });
     });
 

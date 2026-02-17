@@ -111,37 +111,97 @@ p {
     margin-bottom: 1rem;
 }
 
-/* Expandable Interactions */
-.expandable {
+/* Team Accordion */
+.team-grid {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: stretch;
+    /* Stretch to same height */
+    margin-top: 3rem;
+    width: 100%;
+    max-width: 1200px;
+    height: 400px;
+    /* Fixed height for animation stability */
+}
+
+.team-member {
+    flex: 1;
+    /* Default: all equal */
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Smooth expansion */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     cursor: pointer;
-    transition: transform 0.2s;
+    overflow: hidden;
+    position: relative;
 }
 
-.expandable:hover {
-    transform: scale(1.02);
+/* Active State for Team Member (Expanded) */
+.team-member.expanded-card {
+    flex: 3;
+    /* Grow significantly */
+    background: rgba(0, 40, 80, 0.95);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
 }
 
+/* Inactive State (Siblings) */
+.team-grid:has(.expanded-card) .team-member:not(.expanded-card) {
+    flex: 0.8;
+    opacity: 0.6;
+    transform: scale(0.95);
+}
+
+.avatar {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+}
+
+.team-member.expanded-card .avatar {
+    transform: scale(1.2);
+}
+
+.team-member h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    /* Prevent line break during transition */
+}
+
+.team-member span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+/* Hidden Details in Accordion */
 .hidden-details {
     display: none;
-    overflow: hidden;
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    border-radius: 5px;
-    border-left: 3px solid var(--primary-color);
+    /* Initially hidden, JS toggles this */
+    margin-top: 2rem;
+    text-align: left;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease 0.2s;
+    /* Delay for smoothness */
 }
 
-.toggle-icon {
-    font-size: 0.8rem;
-    margin-left: 8px;
-    transition: transform 0.3s;
-    color: var(--accent-color);
-}
-
-.expandable.expanded .toggle-icon {
-    transform: rotate(180deg);
+.team-member.expanded-card .hidden-details {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Content Wrapper */
@@ -216,46 +276,6 @@ p {
     height: 100%;
 }
 
-/* Team Grid */
-.team-grid {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    margin-top: 3rem;
-    flex-wrap: wrap;
-}
-
-.team-member {
-    width: 200px;
-    padding: 1.5rem;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    text-align: center;
-    transition: all 0.3s;
-}
-
-.team-member:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.avatar {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.team-member h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.2rem;
-}
-
-.team-member span {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
 /* Motivation Cards */
 .motivation-cards {
     display: flex;
@@ -272,6 +292,7 @@ p {
     padding: 1.2rem;
     border-radius: 10px;
     border: 1px solid var(--glass-border);
+    cursor: pointer;
 }
 
 .m-card>div {
@@ -447,6 +468,18 @@ p {
     margin-right: 10px;
 }
 
+/* Steppable Elements (Hidden Initially) */
+.steppable {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.steppable.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Animations */
 @keyframes scanDown {
     0% {
@@ -466,18 +499,6 @@ p {
         top: 100%;
         opacity: 0;
     }
-}
-
-/* Steppable Elements (Hidden Initially) */
-.steppable {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.steppable.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 @keyframes boxPulse {
@@ -542,5 +563,12 @@ p {
 
     .team-grid {
         gap: 1rem;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .team-member.expanded-card {
+        flex: 1;
+        width: 100%;
     }
 }
