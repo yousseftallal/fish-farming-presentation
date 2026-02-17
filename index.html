@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;500;700&family=Cairo:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;500;700&display=swap"
         rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,41 +19,29 @@
 
 <body>
 
-    <!-- Intro Overlay -->
-    <div id="intro-overlay">
-        <div class="intro-content">
-            <h1>Ready to Dive?</h1>
-            <button id="dive-btn">ENTER THE OCEAN</button>
-        </div>
-    </div>
-
-    <!-- Professional Background (Video/Image Hybrid) -->
+    <!-- Professional Background -->
     <div class="bg-container">
-        <!-- Deep Ocean Gradient Overlay -->
         <div class="bg-overlay"></div>
-        <!-- High Quality Water Background -->
-        <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2000&auto=format&fit=crop"
+        <!-- Reliable Unsplash Image -->
+        <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?q=80&w=2000&auto=format&fit=crop"
             alt="Deep Ocean" class="bg-image">
     </div>
 
-    <!-- 3D Canvas Container (Bubbles) -->
-    <canvas id="bg-canvas"></canvas>
-
     <!-- Navigation Dots -->
     <div class="nav-dots">
-        <div class="dot active" data-slide="0"></div> <!-- Team -->
-        <div class="dot" data-slide="1"></div> <!-- Table of Contents -->
-        <div class="dot" data-slide="2"></div> <!-- Intro -->
-        <div class="dot" data-slide="3"></div> <!-- Motivation -->
-        <div class="dot" data-slide="4"></div> <!-- Business -->
-        <div class="dot" data-slide="5"></div> <!-- Technical -->
-        <div class="dot" data-slide="6"></div> <!-- YOLOv8 AI -->
-        <div class="dot" data-slide="7"></div> <!-- Sensor Video -->
-        <div class="dot" data-slide="8"></div> <!-- UI Design -->
+        <div class="dot active" data-slide="0"></div>
+        <div class="dot" data-slide="1"></div>
+        <div class="dot" data-slide="2"></div>
+        <div class="dot" data-slide="3"></div>
+        <div class="dot" data-slide="4"></div>
+        <div class="dot" data-slide="5"></div>
+        <div class="dot" data-slide="6"></div>
+        <div class="dot" data-slide="7"></div>
+        <div class="dot" data-slide="8"></div>
     </div>
 
     <!-- Presentation Container -->
-    <main class="presentation-container">
+    <main class="presentation-container visible">
 
         <!-- Slide 1: Team Names -->
         <section class="slide" id="slide-1">
@@ -94,11 +82,11 @@
                         <li><span>01</span> Introduction</li>
                         <li><span>02</span> Motivation</li>
                         <li><span>03</span> Business Capabilities</li>
-                        <li><span>04</span> System Analysis (STA / DFD)</li>
-                        <li><span>05</span> AI & Sensor Analysis</li>
-                        <li><span>06</span> YOLOv8 Model Results</li>
-                        <li><span>07</span> Sensor Demo</li>
-                        <li><span>08</span> UI Design Showcase</li>
+                        <li><span>04</span> System Analysis</li>
+                        <li><span>05</span> Technical Architecture</li>
+                        <li><span>06</span> AI Model Results</li>
+                        <li><span>07</span> Hardware Demo</li>
+                        <li><span>08</span> User Interface</li>
                     </ul>
                 </div>
             </div>
@@ -115,10 +103,8 @@
                 </div>
                 <div class="visual-content">
                     <div class="image-frame">
-                        <!-- Updated Image: Fish Farm -->
                         <img src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?q=80&w=1000&auto=format&fit=crop"
-                            alt="Fish Farm Aerial">
-                        <div class="image-overlay"></div>
+                            alt="Fish Farm">
                     </div>
                 </div>
             </div>
@@ -132,26 +118,31 @@
                     <div class="motivation-cards">
                         <div class="m-card">
                             <i class="fa-solid fa-earth-americas"></i>
-                            <h3>Sustainability</h3>
-                            <p>Reducing environmental impact and waste.</p>
+                            <div>
+                                <h3>Sustainability</h3>
+                                <p>Reducing environmental impact.</p>
+                            </div>
                         </div>
                         <div class="m-card">
                             <i class="fa-solid fa-hand-holding-dollar"></i>
-                            <h3>Profitability</h3>
-                            <p>Maximizing yield for farmers through data.</p>
+                            <div>
+                                <h3>Profitability</h3>
+                                <p>Maximizing yield for farmers.</p>
+                            </div>
                         </div>
                         <div class="m-card">
                             <i class="fa-solid fa-shield-virus"></i>
-                            <h3>Health</h3>
-                            <p>Ensuring healthy fish stocks via AI detection.</p>
+                            <div>
+                                <h3>Health</h3>
+                                <p>Ensuring healthy fish stocks.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="visual-content">
                     <div class="image-frame">
-                        <!-- Updated Image: Diver/Research -->
-                        <img src="https://images.unsplash.com/photo-1582967788606-a171f1080cae?q=80&w=1000&auto=format&fit=crop"
-                            alt="Marine Research">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1000&auto=format&fit=crop"
+                            alt="Research">
                     </div>
                 </div>
             </div>
@@ -173,7 +164,7 @@
                         <p>24/7 monitoring without human intervention.</p>
                     </div>
                     <div class="b-item">
-                        <div class="b-icon"><i class="fa-solid fa-file-contract"></i></div>
+                        <div class="b-icon"><i class="fa-solid fa-layer-group"></i></div>
                         <h3>Scalable</h3>
                         <p>Designed to grow from a single pond to mega-farms.</p>
                     </div>
@@ -187,23 +178,23 @@
                 <div class="text-content">
                     <h2>System Architecture</h2>
                     <ul class="feature-list big-icons">
-                        <li><i class="fa-solid fa-wifi"></i> <strong>IoT Nodes:</strong> ESP32 + STM32 controllers.</li>
+                        <li><i class="fa-solid fa-wifi"></i> <strong>IoT Nodes:</strong> ESP32 reading Temp, pH, O2.
+                        </li>
                         <li><i class="fa-solid fa-cloud"></i> <strong>Cloud:</strong> Firebase Realtime Database.</li>
                         <li><i class="fa-solid fa-mobile"></i> <strong>App:</strong> Flutter Cross-platform application.
                         </li>
                     </ul>
                 </div>
                 <div class="visual-content">
-                    <div class="image-frame" style="max-height: 400px;">
-                        <!-- Updated Image: Circuit/IoT -->
+                    <div class="image-frame">
                         <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=1000&auto=format&fit=crop"
-                            alt="IoT Circuit">
+                            alt="Circuit">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 7: AI YOLOv8 Results (NEW) -->
+        <!-- Slide 7: AI YOLOv8 Results -->
         <section class="slide" id="slide-7">
             <div class="content-split">
                 <div class="text-content">
@@ -212,32 +203,29 @@
 
                     <div class="ai-details-list">
                         <div class="ai-point">
-                            <h3><i class="fa-solid fa-layer-group"></i> The Model</h3>
-                            <p>We utilized <strong>YOLOv8 (You Only Look Once)</strong> for its state-of-the-art speed
-                                and accuracy in real-time object detection.</p>
+                            <h3><i class="fa-solid fa-brain"></i> The Model</h3>
+                            <p>YOLOv8 for real-time detection performance.</p>
                         </div>
                         <div class="ai-point">
-                            <h3><i class="fa-solid fa-dumbbell"></i> Training Strategy</h3>
-                            <p>Used <strong>Transfer Learning</strong> on a custom dataset of 5,000+ infected fish
-                                images. Applied augmentation (flip, rotate, noise) to improve robustness.</p>
+                            <h3><i class="fa-solid fa-database"></i> Training</h3>
+                            <p>Trained on 5,000+ custom annotated images.</p>
                         </div>
                     </div>
 
                     <div class="result-badge">
                         <div class="score">95%</div>
-                        <div class="label">Accuracy Achieved</div>
+                        <div class="label">Accuracy</div>
                     </div>
                 </div>
 
                 <div class="visual-content">
                     <div class="yolo-showcase">
                         <div class="scan-frame">
-                            <!-- Updated Image: Fish for AI -->
                             <img src="https://plus.unsplash.com/premium_photo-1669829375549-d75753df1846?q=80&w=1000&auto=format&fit=crop"
-                                alt="Fish Analysis">
+                                alt="Fish Scanning">
                             <div class="scan-line"></div>
-                            <div class="detection-box" style="top: 40%; left: 30%; width: 150px; height: 100px;">
-                                <span><i class="fa-solid fa-triangle-exclamation"></i> Infected: 95%</span>
+                            <div class="detection-box" style="top: 40%; left: 30%;">
+                                <span><i class="fa-solid fa-triangle-exclamation"></i> Virus: 95%</span>
                             </div>
                         </div>
                         <div class="metrics-grid">
@@ -249,10 +237,6 @@
                                 <span>Precision</span>
                                 <strong>0.96</strong>
                             </div>
-                            <div class="metric">
-                                <span>Recall</span>
-                                <strong>0.93</strong>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -263,11 +247,12 @@
         <section class="slide" id="slide-8">
             <div class="content-wrapper center">
                 <h2>Hardware Demo</h2>
-                <div class="video-container">
-                    <div class="video-placeholder">
-                        <i class="fa-solid fa-play-circle"></i>
-                        <p>Watch Sensor Calibration System</p>
-                    </div>
+                <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=6J7x8Xy5Z0q1k2l3"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                    <!-- Note: Replaced placeholder with a generic embed placeholder. User can swap ID. -->
                 </div>
             </div>
         </section>
@@ -291,13 +276,11 @@
                                 <i class="fa-solid fa-water app-icon"></i>
                                 <div class="app-line"></div>
                                 <div class="app-chart"></div>
-                                <div class="app-line short" style="margin-top: 20px"></div>
                             </div>
                         </div>
                         <div class="mobile-mockup small">
                             <div class="screen">
-                                <div class="app-chart"
-                                    style="height: 150px; border-color: #00ff88; background: rgba(0,255,136,0.1)"></div>
+                                <div class="app-chart" style="border-color: #00ff88;"></div>
                             </div>
                         </div>
                     </div>
@@ -308,7 +291,6 @@
     </main>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
