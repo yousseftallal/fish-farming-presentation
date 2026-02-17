@@ -239,29 +239,31 @@ p {
     color: #fff;
 }
 
-/* --- BUSINESS DASHBOARD & COMPARISON --- */
+/* --- BUSINESS DASHBOARD & COMPARISON (GRID LAYOUT) --- */
 .comparison-container {
-    display: flex;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2x2 Grid */
+    gap: 1.5rem;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1300px;
     margin-top: 2rem;
-    align-items: stretch;
 }
 
 .comp-card {
-    flex: 1;
-    padding: 2rem;
-    border-radius: 20px;
+    padding: 1.5rem;
+    border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem;
     position: relative;
     overflow: hidden;
+    min-height: 220px;
 }
 
+/* Specific Card Styles */
 .comp-card.manual {
     background: rgba(40, 0, 0, 0.6);
     border-color: rgba(255, 68, 68, 0.3);
@@ -271,6 +273,17 @@ p {
     background: rgba(0, 40, 20, 0.6);
     border-color: rgba(0, 255, 136, 0.3);
 }
+
+.comp-card.market {
+    background: rgba(0, 30, 60, 0.6);
+    border-color: rgba(0, 119, 255, 0.3);
+}
+
+.comp-card.eco {
+    background: rgba(20, 60, 40, 0.6);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
 
 .dashboard-bg {
     position: absolute;
@@ -299,20 +312,47 @@ p {
     pointer-events: none;
 }
 
+.market-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1611974765270-ca1258634369?q=80&w=1000&auto=format&fit=crop');
+    opacity: 0.1;
+    mix-blend-mode: luminosity;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.eco-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=1000&auto=format&fit=crop');
+    opacity: 0.15;
+    mix-blend-mode: luminosity;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .comp-content {
     position: relative;
     z-index: 2;
 }
 
 .comp-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+/* Comparison Title Colors */
 .comp-card.manual .comp-title {
     color: var(--danger-color);
 }
@@ -321,20 +361,29 @@ p {
     color: var(--success-color);
 }
 
+.comp-card.market .comp-title {
+    color: var(--secondary-color);
+}
+
+.comp-card.eco .comp-title {
+    color: var(--accent-color);
+}
+
 .stat-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .stat-item {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
+/* Icon Colors */
 .comp-card.manual i {
     color: var(--danger-color);
 }
@@ -342,6 +391,15 @@ p {
 .comp-card.smart i {
     color: var(--success-color);
 }
+
+.comp-card.market i {
+    color: var(--secondary-color);
+}
+
+.comp-card.eco i {
+    color: var(--accent-color);
+}
+
 
 /* --- REALISTIC DEVICE MOCKUPS WITH UI --- */
 .device-showcase {
@@ -748,7 +806,7 @@ p {
     }
 
     .comparison-container {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 
     .device-showcase {
