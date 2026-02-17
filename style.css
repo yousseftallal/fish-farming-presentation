@@ -4,7 +4,6 @@
     --accent-color: #ffd700;
     --success-color: #00ff88;
     --danger-color: #ff4444;
-    /* New for Losses */
     --bg-dark: #001f3f;
     --glass-bg: rgba(0, 30, 60, 0.85);
     --glass-border: rgba(0, 242, 255, 0.2);
@@ -49,7 +48,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Lightened the overlay opacity from 0.95 to 0.85 for more visibility */
     background: radial-gradient(circle at center, rgba(0, 20, 60, 0.3) 0%, rgba(2, 10, 30, 0.85) 100%);
     z-index: 1;
 }
@@ -76,12 +74,11 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0 5%;
-    /* Reduced padding slightly for more space */
     position: relative;
     overflow: hidden;
 }
 
-/* --- TITLE SECTION (SLIDE 1) --- */
+/* --- TITLE SECTION --- */
 .title-group {
     margin-bottom: 3rem;
     position: relative;
@@ -131,7 +128,6 @@ p {
     margin-bottom: 0.8rem;
 }
 
-/* Animation Targets */
 .animate-item {
     opacity: 0;
     transform: translateY(30px);
@@ -188,10 +184,6 @@ p {
     border-radius: 12px;
     text-align: center;
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -217,32 +209,6 @@ p {
     transform: scale(0.95);
 }
 
-.avatar {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 0.8rem;
-    transition: transform 0.3s;
-}
-
-.team-member.expanded-card .avatar {
-    transform: scale(1.1);
-    color: #fff;
-}
-
-.team-member h3 {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
-    white-space: nowrap;
-    font-weight: 600;
-}
-
-.team-member span {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
 .hidden-details {
     display: none;
     text-align: left;
@@ -261,13 +227,26 @@ p {
     transition: all 0.4s ease 0.2s;
 }
 
-/* --- BUSINESS COMPARISON (NEW) --- */
+.avatar {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.team-member.expanded-card .avatar {
+    transform: scale(1.1);
+    color: #fff;
+}
+
+/* --- BUSINESS DASHBOARD & COMPARISON --- */
 .comparison-container {
     display: flex;
     gap: 2rem;
     width: 100%;
     max-width: 1200px;
     margin-top: 2rem;
+    align-items: stretch;
 }
 
 .comp-card {
@@ -279,6 +258,8 @@ p {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .comp-card.manual {
@@ -289,6 +270,40 @@ p {
 .comp-card.smart {
     background: rgba(0, 40, 20, 0.6);
     border-color: rgba(0, 255, 136, 0.3);
+}
+
+/* Dashboard Background for Smart Card */
+.dashboard-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    mix-blend-mode: luminosity;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Manual Noise Background */
+.manual-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/black-linen.png');
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.comp-content {
+    position: relative;
+    z-index: 2;
 }
 
 .comp-title {
@@ -322,10 +337,6 @@ p {
     font-size: 1rem;
 }
 
-.stat-item i {
-    margin-top: 4px;
-}
-
 .comp-card.manual i {
     color: var(--danger-color);
 }
@@ -334,116 +345,121 @@ p {
     color: var(--success-color);
 }
 
-.source-cite {
-    margin-top: auto;
-    font-size: 0.75rem;
-    color: #888;
-    font-style: italic;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 10px;
-}
-
-/* --- DEVICE TRIO (NEW UI SLIDE) --- */
+/* --- REALISTIC DEVICE MOCKUPS --- */
 .device-showcase {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    gap: 1rem;
+    gap: 20px;
     width: 100%;
     margin-top: 2rem;
-    perspective: 1000px;
+    padding-bottom: 2rem;
 }
 
-/* Laptop */
-.device.laptop {
-    width: 400px;
-    aspect-ratio: 16/10;
-    position: relative;
-    background: #111;
-    border-radius: 12px 12px 0 0;
-    border: 2px solid #333;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.device.laptop::after {
-    /* Keyboard base */
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: -10%;
-    width: 120%;
-    height: 12px;
-    background: #222;
-    border-radius: 0 0 10px 10px;
-    transform: perspective(500px) rotateX(10deg);
-}
-
-/* Tablet */
-.device.tablet {
-    width: 140px;
-    aspect-ratio: 3/4;
-    position: relative;
-    background: #111;
-    border-radius: 10px;
-    border: 2px solid #333;
-    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.4);
-    z-index: 2;
-    transform: translateX(-20px);
-}
-
-/* Phone */
-.device.phone {
-    width: 80px;
-    aspect-ratio: 9/19;
-    position: relative;
-    background: #111;
-    border-radius: 12px;
-    border: 2px solid #333;
-    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.4);
-    z-index: 3;
-    transform: translateX(-40px);
-}
-
-.screen-content {
+/* Common Screen Style */
+.screen-display {
     width: 100%;
     height: 100%;
     background: #000;
     overflow: hidden;
-    border-radius: inherit;
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
-.ui-header {
-    width: 100%;
-    height: 10%;
-    background: rgba(0, 242, 255, 0.1);
-    margin-bottom: 5px;
-    border-radius: 4px;
+/* LAPTOP */
+.device.laptop {
+    width: 460px;
+    aspect-ratio: 16/10;
+    background: #1a1a1a;
+    border-radius: 12px 12px 0 0;
+    border: 12px solid #2a2a2a;
+    border-bottom: 20px solid #2a2a2a;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    z-index: 1;
 }
 
-.ui-body {
-    width: 100%;
-    height: 80%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
+.device.laptop::before {
+    /* Camera */
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #333;
+    border-radius: 50%;
 }
 
-.ui-widget {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
+.device.laptop::after {
+    /* Keyboard Base */
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -15%;
+    width: 130%;
+    height: 20px;
+    background: #333;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5) inset;
+    transform: perspective(800px) rotateX(20deg);
 }
 
-.ui-graph {
-    grid-column: span 2;
-    background: rgba(0, 255, 136, 0.05);
-    border: 1px solid rgba(0, 255, 136, 0.2);
+/* TABLET */
+.device.tablet {
+    width: 200px;
+    aspect-ratio: 3/4;
+    background: #111;
+    border-radius: 15px;
+    border: 10px solid #222;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    transform: translateX(-30px);
 }
 
-/* --- GENERIC --- */
+.device.tablet::before {
+    /* Button/Cam */
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 20px;
+    background: #333;
+}
+
+/* PHONE */
+.device.phone {
+    width: 90px;
+    aspect-ratio: 9/19;
+    background: #000;
+    border-radius: 18px;
+    border: 6px solid #333;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    transform: translateX(-50px);
+}
+
+.device.phone::before {
+    /* Dynamic Island / Notch */
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 6px;
+    background: #111;
+    border-radius: 10px;
+    z-index: 5;
+}
+
+/* Generic Styles */
 .content-wrapper {
     width: 100%;
     max-width: 1200px;
@@ -512,12 +528,6 @@ p {
     height: 100%;
 }
 
-.motivation-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 .m-card {
     display: flex;
     flex-direction: column;
@@ -536,43 +546,11 @@ p {
     border-color: var(--primary-color);
 }
 
-.m-card>div {
-    width: 100%;
-}
-
-.m-card i {
-    font-size: 1.8rem;
-    color: var(--accent-color);
-    margin-bottom: 5px;
-}
-
-.m-card h3 {
-    font-size: 1.1rem;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
 .ai-details-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     margin-top: 1.5rem;
-}
-
-.ai-point h3 {
-    font-size: 1.3rem;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-
-.ai-point i {
-    color: var(--primary-color);
 }
 
 .yolo-showcase {
@@ -619,71 +597,6 @@ p {
     animation: boxPulse 2s infinite alternate;
 }
 
-.detection-box span {
-    background: var(--accent-color);
-    color: #000;
-    font-weight: bold;
-    font-size: 0.8rem;
-    padding: 2px 6px;
-}
-
-.metrics-grid {
-    display: flex;
-    gap: 2rem;
-    width: 100%;
-    max-width: 500px;
-    justify-content: space-around;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 0.8rem;
-    border-radius: 10px;
-}
-
-.metric {
-    text-align: center;
-}
-
-.metric strong {
-    display: block;
-    font-size: 1.4rem;
-    color: var(--primary-color);
-}
-
-.result-badge {
-    margin-top: 2rem;
-    border: 1px solid var(--success-color);
-    padding: 0.5rem 2rem;
-    border-radius: 50px;
-    display: inline-block;
-    background: rgba(0, 255, 136, 0.05);
-}
-
-.result-badge .score {
-    font-size: 3rem;
-    color: var(--success-color);
-    font-weight: 800;
-    line-height: 1;
-}
-
-.toc-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    list-style: none;
-}
-
-.toc-list li {
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-left: 3px solid var(--primary-color);
-    font-size: 1.1rem;
-}
-
-.toc-list span {
-    color: var(--primary-color);
-    font-weight: bold;
-    margin-right: 10px;
-}
-
 @keyframes scanDown {
     0% {
         top: 0;
@@ -711,7 +624,6 @@ p {
 
     to {
         border-color: #fff;
-        box-shadow: 0 0 20px var(--accent-color);
     }
 }
 
@@ -749,19 +661,6 @@ p {
         text-align: center;
     }
 
-    h1.main-title {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    .image-frame,
-    .video-wrapper {
-        width: 90%;
-    }
-
     .team-rows {
         flex-direction: column;
         height: auto;
@@ -769,18 +668,6 @@ p {
 
     .team-row {
         flex-wrap: wrap;
-        height: auto;
-        justify-content: center;
-    }
-
-    .team-member {
-        flex: 1 1 45%;
-        max-width: 45%;
-    }
-
-    .team-member.expanded-card {
-        flex: 1 1 100%;
-        max-width: 100%;
     }
 
     .comparison-container {
@@ -788,6 +675,18 @@ p {
     }
 
     .device-showcase {
-        transform: scale(0.8);
+        transform: scale(0.7);
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .device.tablet,
+    .device.phone {
+        transform: none;
+    }
+
+    .device.laptop {
+        width: 300px;
     }
 }
