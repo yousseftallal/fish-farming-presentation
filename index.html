@@ -22,7 +22,6 @@
     <!-- Professional Background -->
     <div class="bg-container">
         <div class="bg-overlay"></div>
-        <!-- Reliable Unsplash Image -->
         <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?q=80&w=2000&auto=format&fit=crop"
             alt="Deep Ocean" class="bg-image">
     </div>
@@ -49,25 +48,37 @@
                 <h1 class="main-title">Smart Fish Farming</h1>
                 <p class="subtitle">Graduation Project Team</p>
                 <div class="team-grid">
-                    <div class="team-member">
+                    <div class="team-member expandable">
                         <div class="avatar"><i class="fa-solid fa-code"></i></div>
-                        <h3>Ahmed Ali</h3>
+                        <h3>Ahmed Ali <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                         <span>Backend Dev</span>
+                        <div class="hidden-details">
+                            <p>Node.js, Express, Firebase Realtime DB, API Security.</p>
+                        </div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member expandable">
                         <div class="avatar"><i class="fa-solid fa-microchip"></i></div>
-                        <h3>Mohamed Sami</h3>
+                        <h3>Mohamed Sami <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                         <span>AI Engineer</span>
+                        <div class="hidden-details">
+                            <p>YOLOv8 Training, Dataset Annotation, Python, OpenCV.</p>
+                        </div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member expandable">
                         <div class="avatar"><i class="fa-solid fa-laptop-code"></i></div>
-                        <h3>Sara Khaled</h3>
+                        <h3>Sara Khaled <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                         <span>Frontend Dev</span>
+                        <div class="hidden-details">
+                            <p>Flutter, Dart, State Management, UI/UX Design.</p>
+                        </div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member expandable">
                         <div class="avatar"><i class="fa-solid fa-wifi"></i></div>
-                        <h3>Omar Yasser</h3>
+                        <h3>Omar Yasser <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                         <span>IoT Specialist</span>
+                        <div class="hidden-details">
+                            <p>ESP32, Sensors Calibration, Hardware Integration.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,7 +110,13 @@
                     <h2>Introduction</h2>
                     <p>Aquaculture faces challenges in water quality management and disease control. Our <strong>Smart
                             Management System</strong> integrates modern tech to solve these issues.</p>
-                    <p>We provide a complete ecosystem: Sensors, AI Diagnostics, and Automation.</p>
+                    <div class="expandable-text expandable">
+                        <h3><i class="fa-solid fa-circle-plus"></i> View Solution Details</h3>
+                        <div class="hidden-details">
+                            <p>We provide a complete ecosystem: Sensors for real-time monitoring, AI Diagnostics for
+                                early disease detection, and Automation for feed and oxygen regulation.</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="visual-content">
                     <div class="image-frame">
@@ -116,25 +133,34 @@
                 <div class="text-content">
                     <h2>Our Motivation</h2>
                     <div class="motivation-cards">
-                        <div class="m-card">
+                        <div class="m-card expandable">
                             <i class="fa-solid fa-earth-americas"></i>
                             <div>
-                                <h3>Sustainability</h3>
-                                <p>Reducing environmental impact.</p>
+                                <h3>Sustainability <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
+                                <div class="hidden-details">
+                                    <p>Reducing environmental impact by minimizing waste and optimizing resource usage.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="m-card">
+                        <div class="m-card expandable">
                             <i class="fa-solid fa-hand-holding-dollar"></i>
                             <div>
-                                <h3>Profitability</h3>
-                                <p>Maximizing yield for farmers.</p>
+                                <h3>Profitability <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
+                                <div class="hidden-details">
+                                    <p>Maximizing yield for farmers through data-driven decisions and reduced mortality
+                                        rates.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="m-card">
+                        <div class="m-card expandable">
                             <i class="fa-solid fa-shield-virus"></i>
                             <div>
-                                <h3>Health</h3>
-                                <p>Ensuring healthy fish stocks.</p>
+                                <h3>Health Seurity <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
+                                <div class="hidden-details">
+                                    <p>Ensuring healthy fish stocks via early AI detection of bacterial and parasitic
+                                        infections.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,20 +179,26 @@
             <div class="content-wrapper center">
                 <h2>Business Potential</h2>
                 <div class="business-grid">
-                    <div class="b-item">
+                    <div class="b-item expandable">
                         <div class="b-icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <h3>Efficiency</h3>
-                        <p>Automated systems reduce manual labor by 40%.</p>
+                        <h3>Efficiency <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
+                        <div class="hidden-details">
+                            <p>Automated systems reduce manual labor by 40% and prevent human error.</p>
+                        </div>
                     </div>
-                    <div class="b-item">
+                    <div class="b-item expandable">
                         <div class="b-icon"><i class="fa-solid fa-robot"></i></div>
-                        <h3>Automation</h3>
-                        <p>24/7 monitoring without human intervention.</p>
+                        <h3>Automation <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
+                        <div class="hidden-details">
+                            <p>24/7 monitoring and auto-correction of pH and Oxygen levels.</p>
+                        </div>
                     </div>
-                    <div class="b-item">
+                    <div class="b-item expandable">
                         <div class="b-icon"><i class="fa-solid fa-layer-group"></i></div>
-                        <h3>Scalable</h3>
-                        <p>Designed to grow from a single pond to mega-farms.</p>
+                        <h3>Scalable <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
+                        <div class="hidden-details">
+                            <p>Modular design allows the system to grow from a single pond to mega-farms.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -202,13 +234,21 @@
                     <p class="subtitle" style="color: var(--primary-color)">Powered by YOLOv8</p>
 
                     <div class="ai-details-list">
-                        <div class="ai-point">
-                            <h3><i class="fa-solid fa-brain"></i> The Model</h3>
-                            <p>YOLOv8 for real-time detection performance.</p>
+                        <div class="ai-point expandable">
+                            <h3><i class="fa-solid fa-brain"></i> The Model <i
+                                    class="fa-solid fa-chevron-down toggle-icon"></i></h3>
+                            <div class="hidden-details">
+                                <p>YOLOv8 Nano chosen for its lightweight architecture, allowing deployment on edge
+                                    devices.</p>
+                            </div>
                         </div>
-                        <div class="ai-point">
-                            <h3><i class="fa-solid fa-database"></i> Training</h3>
-                            <p>Trained on 5,000+ custom annotated images.</p>
+                        <div class="ai-point expandable">
+                            <h3><i class="fa-solid fa-database"></i> Training <i
+                                    class="fa-solid fa-chevron-down toggle-icon"></i></h3>
+                            <div class="hidden-details">
+                                <p>Trained on 5,000+ custom annotated images over 300 epochs with a batch size of 16.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -252,7 +292,6 @@
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
-                    <!-- Note: Replaced placeholder with a generic embed placeholder. User can swap ID. -->
                 </div>
             </div>
         </section>
