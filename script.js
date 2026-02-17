@@ -1,4 +1,4 @@
-// Simplified Slide Navigation
+// Enhanced Slide Navigation with Staggered Animations & Interactions
 document.addEventListener('DOMContentLoaded', () => {
 
     // Register GSAP plugins
@@ -63,6 +63,46 @@ const initSlides = () => {
         });
     });
 
+    // Click to Reveal Details Logic
+    document.querySelectorAll('.expandable').forEach(item => {
+        item.addEventListener('click', function (e) {
+            // Prevent triggering if clicked logic bubbles up weirdly, but usually fine
+            e.stopPropagation();
+
+            const details = this.querySelector('.hidden-details');
+            if (details) {
+                const isVisible = details.style.display === 'block';
+
+                if (isVisible) {
+                    // Close
+                    gsap.to(details, {
+                        height: 0,
+                        opacity: 0,
+                        duration: 0.3,
+                        onComplete: () => {
+                            details.style.display = 'none';
+                            this.classList.remove('expanded');
+                        }
+                    });
+                } else {
+                    // Open
+                    details.style.display = 'block';
+                    details.style.height = 'auto'; // Get full height
+                    const fullHeight = details.offsetHeight;
+                    details.style.height = '0px'; // Reset for animation
+
+                    gsap.to(details, {
+                        height: fullHeight,
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: 'power2.out'
+                    });
+                    this.classList.add('expanded');
+                }
+            }
+        });
+    });
+
     // Initial Trigger
     setTimeout(() => updateUI(0), 100);
 };
@@ -70,20 +110,55 @@ const initSlides = () => {
 const animateSlideContent = (slide) => {
     if (!slide) return;
 
-    // Elements
+    // Elements to animate
     const title = slide.querySelector('h1, h2');
     const subtitle = slide.querySelector('.subtitle');
-    const text = slide.querySelectorAll('p, li');
-    const visual = slide.querySelector('.visual-content, .team-grid, .business-grid');
+    // Select text that isn't hidden details
+    const textGroup = slide.querySelectorAll('p:not(.hidden-details p), ul.feature-list li, .toc-list li');
+    // Select cards
+    const cards = slide.querySelectorAll('.team-member, .m-card, .b-item, .ai-point, .result-badge');
+    const visual = slide.querySelector('.visual-content');
 
-    // Reset
-    gsap.set([title, subtitle, text, visual], { clearProps: 'all' });
+    // Reset state before animating (important for re-triggering)
+    gsap.set([title, subtitle, textGroup, cards, visual], { clearProps: 'all' });
 
-    // Animate
+    // Create Timeline for Staggered Effect
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    // 1. Title
     if (title) {
-        gsap.fromTo(title, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' });
+        tl.fromTo(title, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 });
     }
+
+    // 2. Subtitle
+    if (subtitle) {
+        tl.fromTo(subtitle, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.6");
+    }
+
+    // 3. Text & List Items (Staggered)
+    if (textGroup.length > 0) {
+        tl.fromTo(textGroup,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
+            "-=0.5"
+        );
+    }
+
+    // 4. Cards/Grid Items (Staggered)
+    if (cards.length > 0) {
+        tl.fromTo(cards,
+            { y: 50, opacity: 0, scale: 0.9 },
+            { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.1 },
+            "-=0.5"
+        );
+    }
+
+    // 5. Visuals (Images/Videos)
     if (visual) {
-        gsap.fromTo(visual, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, delay: 0.2, ease: 'back.out(1.2)' });
+        tl.fromTo(visual,
+            { x: 50, opacity: 0 },
+            { x: 0, opacity: 1, duration: 1 },
+            "-=0.8"
+        );
     }
 };
