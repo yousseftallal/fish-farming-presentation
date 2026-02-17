@@ -42,45 +42,99 @@
     <!-- Presentation Container -->
     <main class="presentation-container visible">
 
-        <!-- Slide 1: Team Names -->
+        <!-- Slide 1: Team & Supervision -->
         <section class="slide" id="slide-1">
             <div class="content-wrapper center">
-                <h1 class="main-title">Smart Fish Farming</h1>
-                <p class="subtitle">Graduation Project Team</p>
-                <div class="team-grid">
-                    <div class="team-member steppable">
-                        <div class="avatar"><i class="fa-solid fa-code"></i></div>
-                        <h3>Ahmed Ali</h3>
-                        <span>Backend Dev</span>
+                <h1 class="main-title">Graduation Team</h1>
+                <p class="subtitle" style="margin-bottom: 2rem;">Smart Fish Farming Project</p>
+
+                <!-- Supervisors -->
+                <div class="supervisors-container">
+                    <div class="team-member supervisor steppable" style="visibility: hidden;">
+                        <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+                        <h3>Dr. Supervisor</h3>
+                        <span>Project Supervisor</span>
                         <div class="hidden-details">
-                            <p>Node.js, Express, Firebase Realtime DB, API Security.</p>
+                            <p>Guidance & Research Oversight</p>
                         </div>
                     </div>
-                    <div class="team-member steppable">
-                        <div class="avatar"><i class="fa-solid fa-microchip"></i></div>
-                        <h3>Mohamed Sami</h3>
-                        <span>AI Engineer</span>
+                    <div class="team-member supervisor steppable" style="visibility: hidden;">
+                        <div class="avatar"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <h3>Eng. Assistant</h3>
+                        <span>Teaching Assistant</span>
                         <div class="hidden-details">
-                            <p>YOLOv8 Training, Dataset Annotation, Python, OpenCV.</p>
-                        </div>
-                    </div>
-                    <div class="team-member steppable">
-                        <div class="avatar"><i class="fa-solid fa-laptop-code"></i></div>
-                        <h3>Sara Khaled</h3>
-                        <span>Frontend Dev</span>
-                        <div class="hidden-details">
-                            <p>Flutter, Dart, State Management, UI/UX Design.</p>
-                        </div>
-                    </div>
-                    <div class="team-member steppable">
-                        <div class="avatar"><i class="fa-solid fa-wifi"></i></div>
-                        <h3>Omar Yasser</h3>
-                        <span>IoT Specialist</span>
-                        <div class="hidden-details">
-                            <p>ESP32, Sensors Calibration, Hardware Integration.</p>
+                            <p>Technical Support & Audit</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Team Grid (Split into rows for clean folding) -->
+                <div class="team-rows">
+                    <!-- Row 1: 4 Members -->
+                    <div class="team-row">
+                        <div class="team-member steppable" style="visibility: hidden;">
+                            <div class="avatar"><i class="fa-solid fa-brain"></i></div>
+                            <h3>Youssef Tallal</h3>
+                            <span>AI & Mobile App</span>
+                            <div class="hidden-details">
+                                <p>YOLOv8, Flutter, Android/iOS Integration.</p>
+                            </div>
+                        </div>
+                        <div class="team-member steppable" style="visibility: hidden;">
+                            <div class="avatar"><i class="fa-solid fa-server"></i></div>
+                            <h3>Mostafa Adel</h3>
+                            <span>Backend & AI</span>
+                            <div class="hidden-details">
+                                <p>Server Logic, AI Model Optimization.</p>
+                            </div>
+                        </div>
+                        <div class="team-member steppable" style="visibility: hidden;">
+                            <div class="avatar"><i class="fa-solid fa-code"></i></div>
+                            <h3>Youssef Islam</h3>
+                            <span>Frontend Dev</span>
+                            <div class="hidden-details">
+                                <p>Web Dashboard, UI Implementation.</p>
+                            </div>
+                        </div>
+                        <div class="team-member steppable" style="visibility: hidden;">
+                            <div class="avatar"><i class="fa-brands fa-css3-alt"></i></div>
+                            <h3>Marwan</h3>
+                            <span>Frontend Dev</span>
+                            <div class="hidden-details">
+                                <p>Responsive Design, Animations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: 3 Members (Centered) -->
+                    <div class="team-row">
+                        <div class="team-member steppable" style="visibility: hidden;">
+                            <div class="avatar"><i class="fa-solid fa-microchip"></i></div>
+                            <h3>Fouad</h3>
+                            <span>Backend & Sensors</span>
+                            <div class="hidden-details">
+                                <p>Hardware Config, Data Flow.</p>
+                            </div>
+                        </div>
+                        <div class="team-member steppable" style="visibility: hidden;">
+                            <div class="avatar"><i class="fa-solid fa-pen-nib"></i></div>
+                            <h3>Andrew</h3>
+                            <span>Design & Frontend</span>
+                            <div class="hidden-details">
+                                <p>UI/UX Prototyping, Frontend Logic.</p>
+                            </div>
+                        </div>
+                        <div class="team-member steppable" style="visibility: hidden;">
+                            <div class="avatar"><i class="fa-solid fa-bug"></i></div>
+                            <h3>Ziad</h3>
+                            <span>Tester & Co.</span>
+                            <div class="hidden-details">
+                                <p>QA Testing, Project Coordination.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -90,14 +144,14 @@
                 <h2>Table of Contents</h2>
                 <div class="toc-container">
                     <ul class="toc-list">
-                        <li class="steppable"><span>01</span> Introduction</li>
-                        <li class="steppable"><span>02</span> Motivation</li>
-                        <li class="steppable"><span>03</span> Business Capabilities</li>
-                        <li class="steppable"><span>04</span> System Analysis</li>
-                        <li class="steppable"><span>05</span> Technical Architecture</li>
-                        <li class="steppable"><span>06</span> AI Model Results</li>
-                        <li class="steppable"><span>07</span> Hardware Demo</li>
-                        <li class="steppable"><span>08</span> User Interface</li>
+                        <li class="steppable" style="visibility: hidden;"><span>01</span> Introduction</li>
+                        <li class="steppable" style="visibility: hidden;"><span>02</span> Motivation</li>
+                        <li class="steppable" style="visibility: hidden;"><span>03</span> Business Capabilities</li>
+                        <li class="steppable" style="visibility: hidden;"><span>04</span> System Analysis</li>
+                        <li class="steppable" style="visibility: hidden;"><span>05</span> Technical Architecture</li>
+                        <li class="steppable" style="visibility: hidden;"><span>06</span> AI Model Results</li>
+                        <li class="steppable" style="visibility: hidden;"><span>07</span> Hardware Demo</li>
+                        <li class="steppable" style="visibility: hidden;"><span>08</span> User Interface</li>
                     </ul>
                 </div>
             </div>
@@ -108,9 +162,10 @@
             <div class="content-split">
                 <div class="text-content">
                     <h2>Introduction</h2>
-                    <p class="steppable">Aquaculture faces challenges in water quality management and disease control.
-                        Our <strong>Smart Management System</strong> integrates modern tech to solve these issues.</p>
-                    <div class="expandable-text expandable steppable">
+                    <p class="steppable" style="visibility: hidden;">Aquaculture faces challenges in water quality
+                        management and disease control. Our <strong>Smart Management System</strong> integrates modern
+                        tech to solve these issues.</p>
+                    <div class="expandable-text expandable steppable" style="visibility: hidden;">
                         <h3><i class="fa-solid fa-circle-plus"></i> View Solution Details</h3>
                         <div class="hidden-details">
                             <p>We provide a complete ecosystem: Sensors for real-time monitoring, AI Diagnostics for
@@ -118,7 +173,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="visual-content steppable">
+                <div class="visual-content steppable" style="visibility: hidden;">
                     <div class="image-frame">
                         <img src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?q=80&w=1000&auto=format&fit=crop"
                             alt="Fish Farm">
@@ -133,7 +188,7 @@
                 <div class="text-content">
                     <h2>Our Motivation</h2>
                     <div class="motivation-cards">
-                        <div class="m-card expandable steppable">
+                        <div class="m-card expandable steppable" style="visibility: hidden;">
                             <i class="fa-solid fa-earth-americas"></i>
                             <div>
                                 <h3>Sustainability <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
@@ -143,7 +198,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="m-card expandable steppable">
+                        <div class="m-card expandable steppable" style="visibility: hidden;">
                             <i class="fa-solid fa-hand-holding-dollar"></i>
                             <div>
                                 <h3>Profitability <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
@@ -153,7 +208,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="m-card expandable steppable">
+                        <div class="m-card expandable steppable" style="visibility: hidden;">
                             <i class="fa-solid fa-shield-virus"></i>
                             <div>
                                 <h3>Health Seurity <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
@@ -165,7 +220,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="visual-content steppable">
+                <div class="visual-content steppable" style="visibility: hidden;">
                     <div class="image-frame">
                         <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1000&auto=format&fit=crop"
                             alt="Research">
@@ -179,21 +234,21 @@
             <div class="content-wrapper center">
                 <h2>Business Potential</h2>
                 <div class="business-grid">
-                    <div class="b-item expandable steppable">
+                    <div class="b-item expandable steppable" style="visibility: hidden;">
                         <div class="b-icon"><i class="fa-solid fa-chart-line"></i></div>
                         <h3>Efficiency <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                         <div class="hidden-details">
                             <p>Automated systems reduce manual labor by 40% and prevent human error.</p>
                         </div>
                     </div>
-                    <div class="b-item expandable steppable">
+                    <div class="b-item expandable steppable" style="visibility: hidden;">
                         <div class="b-icon"><i class="fa-solid fa-robot"></i></div>
                         <h3>Automation <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                         <div class="hidden-details">
                             <p>24/7 monitoring and auto-correction of pH and Oxygen levels.</p>
                         </div>
                     </div>
-                    <div class="b-item expandable steppable">
+                    <div class="b-item expandable steppable" style="visibility: hidden;">
                         <div class="b-icon"><i class="fa-solid fa-layer-group"></i></div>
                         <h3>Scalable <i class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                         <div class="hidden-details">
@@ -210,15 +265,15 @@
                 <div class="text-content">
                     <h2>System Architecture</h2>
                     <ul class="feature-list big-icons">
-                        <li class="steppable"><i class="fa-solid fa-wifi"></i> <strong>IoT Nodes:</strong> ESP32 reading
-                            Temp, pH, O2.</li>
-                        <li class="steppable"><i class="fa-solid fa-cloud"></i> <strong>Cloud:</strong> Firebase
-                            Realtime Database.</li>
-                        <li class="steppable"><i class="fa-solid fa-mobile"></i> <strong>App:</strong> Flutter
-                            Cross-platform application.</li>
+                        <li class="steppable" style="visibility: hidden;"><i class="fa-solid fa-wifi"></i> <strong>IoT
+                                Nodes:</strong> ESP32 reading Temp, pH, O2.</li>
+                        <li class="steppable" style="visibility: hidden;"><i class="fa-solid fa-cloud"></i>
+                            <strong>Cloud:</strong> Firebase Realtime Database.</li>
+                        <li class="steppable" style="visibility: hidden;"><i class="fa-solid fa-mobile"></i>
+                            <strong>App:</strong> Flutter Cross-platform application.</li>
                     </ul>
                 </div>
-                <div class="visual-content steppable">
+                <div class="visual-content steppable" style="visibility: hidden;">
                     <div class="image-frame">
                         <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=1000&auto=format&fit=crop"
                             alt="Circuit">
@@ -235,7 +290,7 @@
                     <p class="subtitle" style="color: var(--primary-color)">Powered by YOLOv8</p>
 
                     <div class="ai-details-list">
-                        <div class="ai-point expandable steppable">
+                        <div class="ai-point expandable steppable" style="visibility: hidden;">
                             <h3><i class="fa-solid fa-brain"></i> The Model <i
                                     class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                             <div class="hidden-details">
@@ -243,7 +298,7 @@
                                     devices.</p>
                             </div>
                         </div>
-                        <div class="ai-point expandable steppable">
+                        <div class="ai-point expandable steppable" style="visibility: hidden;">
                             <h3><i class="fa-solid fa-database"></i> Training <i
                                     class="fa-solid fa-chevron-down toggle-icon"></i></h3>
                             <div class="hidden-details">
@@ -253,13 +308,13 @@
                         </div>
                     </div>
 
-                    <div class="result-badge steppable">
+                    <div class="result-badge steppable" style="visibility: hidden;">
                         <div class="score">95%</div>
                         <div class="label">Accuracy</div>
                     </div>
                 </div>
 
-                <div class="visual-content steppable">
+                <div class="visual-content steppable" style="visibility: hidden;">
                     <div class="yolo-showcase">
                         <div class="scan-frame">
                             <!-- New Image Source (Technology / Analysis) that is reliable -->
@@ -289,7 +344,7 @@
         <section class="slide" id="slide-8">
             <div class="content-wrapper center">
                 <h2>Hardware Demo</h2>
-                <div class="video-wrapper steppable">
+                <div class="video-wrapper steppable" style="visibility: hidden;">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=6J7x8Xy5Z0q1k2l3"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -305,12 +360,15 @@
                     <h2>User Interface</h2>
                     <p>Designed for farmers, engineers, and farm owners.</p>
                     <ul class="feature-list">
-                        <li class="steppable"><i class="fa-solid fa-moon"></i> High Contrast Dark Mode</li>
-                        <li class="steppable"><i class="fa-solid fa-chart-pie"></i> Visual Data Analytics</li>
-                        <li class="steppable"><i class="fa-solid fa-bell"></i> Instant Notifications</li>
+                        <li class="steppable" style="visibility: hidden;"><i class="fa-solid fa-moon"></i> High Contrast
+                            Dark Mode</li>
+                        <li class="steppable" style="visibility: hidden;"><i class="fa-solid fa-chart-pie"></i> Visual
+                            Data Analytics</li>
+                        <li class="steppable" style="visibility: hidden;"><i class="fa-solid fa-bell"></i> Instant
+                            Notifications</li>
                     </ul>
                 </div>
-                <div class="visual-content steppable">
+                <div class="visual-content steppable" style="visibility: hidden;">
                     <div class="mobile-mockup-group">
                         <div class="mobile-mockup">
                             <div class="screen">

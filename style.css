@@ -78,7 +78,7 @@ body {
 }
 
 h1.main-title {
-    font-size: 4rem;
+    font-size: 3rem;
     font-family: 'Orbitron';
     margin-bottom: 0.5rem;
     color: #fff;
@@ -86,7 +86,7 @@ h1.main-title {
 }
 
 h2 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-family: 'Orbitron';
     color: var(--primary-color);
     margin-bottom: 1.5rem;
@@ -100,42 +100,69 @@ h2 {
 }
 
 p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
     color: var(--text-muted);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
-/* Steppable Elements - Hidden Initially */
+/* Steppable Elements */
 .steppable {
     opacity: 0;
     visibility: hidden;
-    /* Critical for autoAlpha */
     transform: translateY(30px);
 }
 
 .steppable.visible {
-    /* GSAP handles this, but basic fallback */
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* Team Accordion */
-.team-grid {
+/* --- SUPERVISORS --- */
+.supervisors-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.team-member.supervisor {
+    border-color: var(--accent-color);
+    background: rgba(255, 215, 0, 0.1);
+    max-width: 300px;
+    height: auto;
+}
+
+.team-member.supervisor h3 {
+    color: var(--accent-color);
+}
+
+/* --- TEAM ROWS (New Layout) --- */
+.team-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: center;
+}
+
+.team-row {
     display: flex;
     gap: 1rem;
     justify-content: center;
-    align-items: stretch;
-    margin-top: 3rem;
     width: 100%;
+    height: 250px;
+    /* Shorter for compact look */
     max-width: 1200px;
-    height: 400px;
 }
 
+/* Base Team Member Card */
 .team-member {
     flex: 1;
-    padding: 1.5rem;
+    /* Equal width initially */
+    padding: 1rem;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
@@ -148,52 +175,72 @@ p {
     cursor: pointer;
     overflow: hidden;
     position: relative;
+
+    /* Small/Compact Initial State */
+    opacity: 0.85;
+    transform: scale(0.98);
 }
 
+.team-member:hover {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Active Expanded State */
 .team-member.expanded-card {
-    flex: 3;
+    flex: 2.5;
+    /* Grow */
+    opacity: 1;
+    transform: scale(1.02);
     background: rgba(0, 40, 80, 0.95);
     border-color: var(--primary-color);
-    box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.3);
+    z-index: 5;
 }
 
-.team-grid:has(.expanded-card) .team-member:not(.expanded-card) {
-    flex: 0.8;
-    opacity: 0.6;
+/* Sibling Shrinking behavior limited to the SAME ROW */
+.team-row:has(.expanded-card) .team-member:not(.expanded-card) {
+    flex: 0.6;
+    /* Shrink siblings */
+    opacity: 0.5;
     transform: scale(0.95);
 }
 
 .avatar {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     transition: transform 0.3s;
 }
 
 .team-member.expanded-card .avatar {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .team-member h3 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 0.2rem;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .team-member span {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     transition: opacity 0.3s;
 }
 
 .hidden-details {
     display: none;
-    margin-top: 2rem;
+    margin-top: 1rem;
     text-align: left;
     width: 100%;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
     transition: all 0.5s ease 0.2s;
+    font-size: 0.9rem;
 }
 
 .team-member.expanded-card .hidden-details {
@@ -202,6 +249,8 @@ p {
     transform: translateY(0);
 }
 
+
+/* Generic Components */
 .content-wrapper {
     width: 100%;
     max-width: 1200px;
@@ -536,14 +585,24 @@ p {
         width: 90%;
     }
 
-    .team-grid {
-        gap: 1rem;
-        height: auto;
+    .team-rows {
         flex-direction: column;
+        height: auto;
+    }
+
+    .team-row {
+        flex-wrap: wrap;
+        height: auto;
+        justify-content: center;
+    }
+
+    .team-member {
+        flex: 1 1 45%;
+        max-width: 45%;
     }
 
     .team-member.expanded-card {
-        flex: 1;
-        width: 100%;
+        flex: 1 1 100%;
+        max-width: 100%;
     }
 }
